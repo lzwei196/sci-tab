@@ -1,0 +1,10 @@
+{
+    "name": "sci_tab",
+    "description": "Build an Extension!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions":["activeTab", "storage", "tabs"],
+    "action": {
+        "default_popup": "popup.html"
+      }
+  }

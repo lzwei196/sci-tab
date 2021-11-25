@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="form_check.css">
+  </head>
+  <body style="width: 400px; height: 400px">
+    <div class="container">
+    <div class="align-items-center">
+
+      <div class="row">
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name='choice' value="ScienceDirect" id="sci1">
+          <label class="form-check-label" for="flexCheckDefault">
+            ScienceDirect
+          </label>
+        </div>
+      </div>
+     </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name='choice' value="ResearchGate" id="sci2">
+            <label class="form-check-label" for="flexCheckDefault">
+              ResearchGate
+            </label>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="col">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name='choice' value="wiley" id="sci3">
+            <label class="form-check-label" for="flexCheckDefault">
+              wiley
+            </label>
+          </div>
+        </div>
+      </div>
+      
+  
+      <div>
+        <button type="button" class="btn btn-primary" id = "get_all_sci_urls">Get all the Sci urls</button>
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-secondary" id = "get_all_urls" style="margin-top:10px;">Get all the urls</button>
+      </div>
+
+    </div>
+  </div>
+   
+
+   
+    
+    <script src="popup.js"></script>
+    <script src="jquery-3.6.0.slim.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="bootstrap-4.3.1-dist\js\bootstrap.min.js"></script>
+ 
+</body>
+</html>
