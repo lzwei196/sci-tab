@@ -6,5 +6,8 @@
     "permissions":["activeTab", "storage", "tabs"],
     "action": {
         "default_popup": "popup.html"
+      },
+      "icons": {
+        "16": "beaker.png"
       }
   }

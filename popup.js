@@ -4,29 +4,43 @@ the_button.onclick = () => {
 chrome.windows.getAll({populate:true}, getAllOpenWindows);
 function getAllOpenWindows(winData) {
     const rbs = document.querySelectorAll('input[name="choice"]');
-    let selectedValue = [];
-            for (const rb of rbs) {
-                if (rb.checked) {
-                    selectedValue.push(document.getElementById(rb.id).value.toLowerCase());
-                }
-            }
-
+    //check what filtering keywords has been chosen
+    var myOpts = document.getElementById('filter_keywords_form')
+    var filter_words = getSelectValues(myOpts)
+    const cb = document.getElementById('custom_input_checkbox');
+    if (cb.checked) {
+        const custom_field = document.getElementById('custom_keyword_input').value
+        let custom_keywords = custom_field.split(',')
+        filter_words = filter_words.concat(custom_keywords)
+    }
+    console.log(filter_words)
 //Filter out the links based on user selection
-  var filtered_tabs = {}
+  var filtered_tabs = []
   for (var i in winData) {
         var winTabs = winData[i].tabs;
         var totTabs = winTabs.length;
         for (var j=0; j<totTabs;j++) {
           s1 = winTabs[j].url.toLowerCase();
-          selectedValue.forEach(element=>{
-             if (s1.indexOf(element) != -1){
-                filtered_tabs[(winTabs[j].title)]=(winTabs[j].url)
+          s2 = winTabs[j].title.toLowerCase();
+          filter_words.forEach(element=>{
+             if (s1.indexOf(element.toLowerCase()) != -1 
+             ||  s2.indexOf(element.toLowerCase()) != -1){
+                var link_ob = {}
+                link_ob['title'] =winTabs[j].title
+                link_ob['link'] = winTabs[j].url
+                filtered_tabs.push(link_ob)
              }
             })
         }
     }
-   filtered_tabs = JSON.stringify(filtered_tabs)
-   download(filtered_tabs, 'filtered.json', 'text/plain')
+    console.log(filtered_tabs)
+  // filtered_tabs = JSON.stringify(filtered_tabs)
+  // console.log(filtered_tabs)
+  // download(filtered_tabs, 'filtered.json', 'text/plain')
+   filtered_tabs = getUniqueListBy(filtered_tabs, 'title')
+   console.log(filtered_tabs)
+   filtered_tabs = convertToCSV(filtered_tabs)
+  // download(filtered_tabs, 'Sci_filtered.csv', 'text/plain')
 }
 }
 
@@ -59,7 +73,7 @@ all_button.onclick = () => {
   //     all_tabs = JSON.stringify(all_tabs)
        all_tabs_csv = convertToCSV(all_tabs)
        download(all_tabs_csv, 'test.csv', 'text/plain')
-       download(all_tabs, 'all.json', 'text/plain')
+//       download(all_tabs, 'all.json', 'text/plain')
     }
 }
 
@@ -93,11 +107,22 @@ function convertToCSV(objArray) {
     return str;
 }
 
-function convertToCSV(arr) {
-    const array = [Object.keys(arr[0])].concat(arr)
+
+function getSelectValues(select) {
+    var result = [];
+    var options = select && select.options;
+    var opt;
   
-    return array.map(it => {
-      return Object.values(it).toString()
-    }).join('\n')
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+      opt = options[i];
+  
+      if (opt.selected) {
+        result.push(opt.value || opt.text);
+      }
+    }
+    return result;
   }
-  
+
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+}
