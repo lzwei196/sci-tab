@@ -1,3 +1,5 @@
+var today = new Date(); 
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 let the_button = document.getElementById('get_all_sci_urls')
 the_button.onclick = () => {
@@ -40,7 +42,7 @@ function getAllOpenWindows(winData) {
    filtered_tabs = getUniqueListBy(filtered_tabs, 'title')
    console.log(filtered_tabs)
    filtered_tabs = convertToCSV(filtered_tabs)
-  // download(filtered_tabs, 'Sci_filtered.csv', 'text/plain')
+   download(filtered_tabs, date + '_Sci_filtered.csv', 'text/plain')
 }
 }
 
@@ -71,8 +73,10 @@ all_button.onclick = () => {
         }
     }
   //     all_tabs = JSON.stringify(all_tabs)
+       all_tabs = getUniqueListBy(all_tabs, 'title')
        all_tabs_csv = convertToCSV(all_tabs)
-       download(all_tabs_csv, 'test.csv', 'text/plain')
+
+       download(all_tabs_csv, date + '_All_opened_tabs.csv', 'text/plain')
 //       download(all_tabs, 'all.json', 'text/plain')
     }
 }
@@ -89,6 +93,7 @@ function download(content, fileName, contentType) {
 
 
 function convertToCSV(objArray) {
+    objArray.unshift({'title':'Tab title', 'link':'link'})
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
 
     var str = '';
@@ -126,3 +131,4 @@ function getSelectValues(select) {
   function getUniqueListBy(arr, key) {
     return [...new Map(arr.map(item => [item[key], item])).values()]
 }
+
