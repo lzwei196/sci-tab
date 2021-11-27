@@ -8,6 +8,6 @@
         "default_popup": "popup.html"
       },
       "icons": {
-        "16": "beaker.png"
+        "16": "images/beaker.png"
       }
   }

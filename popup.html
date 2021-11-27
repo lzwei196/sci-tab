@@ -10,11 +10,11 @@
     <div class="align-items-center">
 
       <div class="row">
-      <div class="col" style="margin-top:10px;">
-        <img   src="favicon-32x32.png">
+      <div class="col align-self-center" style="margin-top:10px;">
+        <img   src="images/favicon-32x32.png">   <p class="fw-bold">SCITAB</p>
       </div>
 
-        <div class="col-10">
+        <div class="col-8">
       <div class="form-group"  style="margin-top:10px;">
         <label for="filter_form" >Choose filtering SCI keyword</label>
         <select multiple class="form-control" id='filter_keywords_form'>
@@ -32,11 +32,10 @@
         Checkbox if custom keywords will be used
       </div>
 
+
       <div class="input-group mb-3" >  
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            <input type="checkbox" aria-label="Checkbox if custom keywords will be used" id="custom_input_checkbox">
-          </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="custom_input_checkbox">
         </div>
         <input type="text" class="form-control" placeholder="Keywords here, seperate by comma" aria-label="Text input with checkbox" id="custom_keyword_input">
       </div>
